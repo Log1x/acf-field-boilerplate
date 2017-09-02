@@ -1,16 +1,17 @@
 <?php
 /*
-	Plugin Name: Advanced Custom Fields: Field Boilerplate
-	Plugin URI: https://github.com/log1x/acf-field-boilerplate
-	Description: A simple ACF field boilerplate with clean syntax.
-	Version: 1.0.0
-	Author: Log1x
-	Author URI: https://log1x.com
-	License: GPLv2 or later
-	License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Plugin Name: Advanced Custom Fields: Field Boilerplate
+Plugin URI: https://github.com/log1x/acf-field-boilerplate
+Description: A simple ACF field boilerplate with clean syntax.
+Version: 1.0.0
+Author: Log1x
+Author URI: https://log1x.com
+
+License: MIT License
+License URI: http://opensource.org/licenses/MIT
 */
 
-namespace Acf\Field;
+namespace Acf\Field\Boilerplate;
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {

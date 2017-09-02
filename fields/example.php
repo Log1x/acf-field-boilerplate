@@ -1,6 +1,6 @@
 <?php
 
-namespace Acf\Field;
+namespace Acf\Field\Boilerplate;
 
 /**
  * Exit if accessed directly
