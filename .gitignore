@@ -1,0 +1,21 @@
+# Application
+dist
+cache
+.cache-loader
+
+# Remote Sync
+.remote-sync.json
+
+# WP-CLI
+db-sync
+*.sql
+
+# Vendor (e.g. Composer)
+vendor
+
+# Node Package Manager
+node_modules
+
+# Debug
+npm-debug.log
+yarn-error.log

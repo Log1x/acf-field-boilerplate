@@ -1,0 +1,32 @@
+{
+  "name": "log1x/acf-field-boilerplate",
+  "type": "wordpress-plugin",
+  "license": "MIT",
+  "description": "A simple ACF field boilerplate with clean syntax.",
+  "homepage": "https://github.com/log1x/acf-field-boilerplate",
+  "authors": [
+    {
+      "name": "Brandon Nifong",
+      "email": "log1x@log1x.com",
+      "homepage": "https://log1x.com"
+    }
+  ],
+  "keywords": [
+    "wordpress"
+  ],
+  "support": {
+    "issues": "https://github.com/log1x/acf-field-boilerplate/issues"
+  },
+  "require": {
+    "php": ">=7",
+    "composer/installers": "~1.0"
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "scripts": {
+    "test": [
+      "vendor/bin/phpcs --extensions=php --ignore=vendor/ ."
+    ]
+  }
+}
