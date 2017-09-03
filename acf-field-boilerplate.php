@@ -15,40 +15,40 @@ namespace Acf\Field\Boilerplate;
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {
-	exit;
+    exit;
 }
 
 if (!class_exists('init')) {
-	class init
-	{
-		/**
-		 * Construct
-		 */
-		public function __construct()
-		{
-			$this->settings = [
-				'version'	=> '1.0.0',
-				'url'		=> plugin_dir_url(__FILE__),
-				'path'		=> plugin_dir_path(__FILE__)
-			];
+    class init
+    {
+        /**
+         * Construct
+         */
+        public function __construct()
+        {
+            $this->settings = [
+                'version' => '1.0.0',
+                'url'     => plugin_dir_url(__FILE__),
+                'path'    => plugin_dir_path(__FILE__)
+            ];
 
-			load_plugin_textdomain('acf-field-boilerplate', false, plugin_basename(dirname(__FILE__ )) . '/lang');
-			add_action('acf/include_field_types', [$this, 'field_types']);
-			add_action('acf/register_fields', [$this, 'field_types']);
-		}
+            load_plugin_textdomain('acf-field-boilerplate', false, plugin_basename(dirname(__FILE__ )) . '/resources/lang');
+            add_action('acf/include_field_types', [$this, 'fields']);
+            add_action('acf/register_fields', [$this, 'fields']);
+        }
 
 
-		/**
-		 * Include our ACF Field Types
-		 *
-		 * @param  integer $version
-		 * @return void
-		 */
-		public function field_types($version = 5)
-		{
-			include_once('fields/example.php');
-		}
-	}
+        /**
+         * Include our ACF Field Types
+         *
+         * @param  integer $version
+         * @return void
+         */
+        public function fields($version = 5)
+        {
+            include_once('fields/example.php');
+        }
+    }
 
     // Initialize
     new init();

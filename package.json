@@ -1,0 +1,97 @@
+{
+  "name": "acf-field-boilerplate",
+  "version": "1.0.0",
+  "author": "Brandon Nifong <log1x@log1x.com>",
+  "homepage": "https://github.com/Log1x/acf-field-boilerplate",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Log1x/acf-field-boilerplate.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Log1x/acf-field-boilerplate/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://opensource.org/licenses/MIT"
+    }
+  ],
+  "eslintConfig": {
+    "root": true,
+    "extends": "eslint:recommended",
+    "globals": {
+      "wp": true
+    },
+    "env": {
+      "node": true,
+      "es6": true,
+      "amd": true,
+      "browser": true,
+      "jquery": true
+    },
+    "parserOptions": {
+      "ecmaFeatures": {
+        "globalReturn": true,
+        "generators": false,
+        "objectLiteralDuplicateProperties": false,
+        "experimentalObjectRestSpread": true
+      },
+      "ecmaVersion": 2017,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "import"
+    ],
+    "settings": {
+      "import/core-modules": [],
+      "import/ignore": [
+        "node_modules",
+        "\\.(coffee|scss|css|less|hbs|svg|json)$"
+      ]
+    },
+    "rules": {
+      "comma-dangle": [
+        "error",
+        {
+          "arrays": "always-multiline",
+          "objects": "always-multiline",
+          "imports": "always-multiline",
+          "exports": "always-multiline",
+          "functions": "ignore"
+        }
+      ]
+    }
+  },
+  "stylelint": {
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "no-empty-source": null
+    }
+  },
+  "scripts": {
+    "build": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build:production": "npm run -s clean && NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "clean": "npm run -s clean:dist",
+    "clean:dist": "rimraf dist",
+    "lint": "npm run -s lint:scripts && npm run -s lint:styles",
+    "lint:scripts": "eslint resources/assets/scripts",
+    "lint:styles": "styleint 'resources/assets/styles/**/*.{css,styl,sass,scss,less}'",
+    "test": "npm run -s lint"
+  },
+  "engines": {
+    "node": ">= 6.9.4"
+  },
+  "devDependencies": {
+    "eslint": "^4.6.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.7.0",
+    "laravel-mix": "^1.4.2",
+    "rimraf": "^2.6.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^3.0.1",
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+  }
+}
