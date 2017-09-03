@@ -94,10 +94,10 @@ if (!class_exists('ExampleField')) {
             $url     = $this->settings['url'];
             $version = $this->settings['version'];
 
-            wp_register_script('acf-input-field-boilerplate', "{$url}dist/js/main.js", ['acf-input'], $version);
+            wp_register_script('acf-input-field-boilerplate', "{$url}dist/scripts/main.js", ['acf-input'], $version);
             wp_enqueue_script('acf-input-field-boilerplate');
 
-            wp_register_style('acf-input-field-boilerplate', "{$url}dist/css/main.css", ['acf-input'], $version);
+            wp_register_style('acf-input-field-boilerplate', "{$url}dist/styles/main.css", ['acf-input'], $version);
             wp_enqueue_style('acf-input-field-boilerplate');
         }
 
