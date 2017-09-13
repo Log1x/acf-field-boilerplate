@@ -183,7 +183,7 @@ if (!class_exists('ExampleField')) {
          */
         public function load_value($value, $post_id, $field)
         {
-
+            return $field;
         }
 
         /**
@@ -198,7 +198,7 @@ if (!class_exists('ExampleField')) {
          */
         public function update_value($value, $post_id, $field)
         {
-
+            return $field;
         }
 
         /**
@@ -213,7 +213,7 @@ if (!class_exists('ExampleField')) {
          */
         public function format_value($value, $post_id, $field)
         {
-
+            return $field;
         }
 
         /*
@@ -231,7 +231,7 @@ if (!class_exists('ExampleField')) {
         */
         public function validate_value($valid, $value, $field, $input)
         {
-
+            return true;
         }
 
         /**
@@ -259,7 +259,7 @@ if (!class_exists('ExampleField')) {
          */
         public function load_field($field)
         {
-
+            return $field;
         }
 
         /**
@@ -272,7 +272,7 @@ if (!class_exists('ExampleField')) {
          */
         public function update_field($field)
         {
-
+            return $field;
         }
 
         /**
@@ -285,7 +285,7 @@ if (!class_exists('ExampleField')) {
          */
         public function delete_field($field)
         {
-
+            return $field;
         }
     }
 
