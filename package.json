@@ -1,6 +1,6 @@
 {
   "name": "acf-field-boilerplate",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Brandon Nifong <log1x@log1x.com>",
   "homepage": "https://github.com/Log1x/acf-field-boilerplate",
   "private": true,
@@ -70,27 +70,25 @@
     }
   },
   "scripts": {
-    "build": "NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "build:production": "npm run -s clean && NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build": "cross-env NODE_ENV=development webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build:production": "npm run -s clean && cross-env NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf dist",
     "lint": "npm run -s lint:scripts && npm run -s lint:styles",
     "lint:scripts": "eslint resources/assets/scripts",
-    "lint:styles": "styleint 'resources/assets/styles/**/*.{css,styl,sass,scss,less}'",
+    "lint:styles": "styleint 'resources/assets/styles/**/*.{css,scss}'",
     "test": "npm run -s lint"
   },
   "engines": {
     "node": ">= 6.9.4"
   },
   "devDependencies": {
-    "eslint": "^4.6.0",
-    "eslint-loader": "^1.9.0",
-    "eslint-plugin-import": "^2.7.0",
-    "laravel-mix": "^1.4.2",
-    "rimraf": "^2.6.1",
-    "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "webpack": "^3.5.5"
+    "cross-env": "^5.2.0",
+    "eslint": "^5.5.0",
+    "eslint-loader": "^2.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "laravel-mix": "^2.1.14",
+    "rimraf": "^2.6.2"
   },
   "dependencies": {
   }

@@ -1,4 +1,4 @@
-const mix            = require('laravel-mix');
+const mix = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ mix.setPublicPath(dist);
 mix.setResourceRoot('../');
 
 // Stylus
-mix.stylus(`${assets}/styles/main.styl`, `${dist}/styles/main.css`);
+mix.sass(`${assets}/styles/main.scss`, `${dist}/styles/main.css`);
 
 // Javascript
 mix.js(`${assets}/scripts/main.js`, `${dist}/scripts`);
