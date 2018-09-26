@@ -19,3 +19,9 @@ node_modules
 # Debug
 npm-debug.log
 yarn-error.log
+
+# Visual Studio
+.vscode
+
+# macOS
+.DS_Store
