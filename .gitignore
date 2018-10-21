@@ -3,25 +3,18 @@ dist
 cache
 .cache-loader
 
-# Remote Sync
-.remote-sync.json
-
 # WP-CLI
 db-sync
 *.sql
 
-# Vendor (e.g. Composer)
+# Vendor
 vendor
-
-# Node Package Manager
 node_modules
 
 # Debug
 npm-debug.log
 yarn-error.log
 
-# Visual Studio
+# Environment
 .vscode
-
-# macOS
 .DS_Store

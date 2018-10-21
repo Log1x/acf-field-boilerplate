@@ -18,7 +18,7 @@ const dist      = 'dist';
 mix.setPublicPath(dist);
 mix.setResourceRoot('../');
 
-// Stylus
+// SASS
 mix.sass(`${assets}/styles/main.scss`, `${dist}/styles/main.css`);
 
 // Javascript
