@@ -1,18 +1,18 @@
 <?php
 
-namespace Acf\Field\Boilerplate;
+namespace App\MyField\Fields;
 
 /**
  * Return if Example Field already exists.
  */
-if (class_exists('ExampleField')) {
+if (class_exists('Example')) {
     return;
 }
 
 /**
  * Example Field
  */
-class ExampleField extends \acf_field
+class Example extends \acf_field
 {
     /**
      * Constructor

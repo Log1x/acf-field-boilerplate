@@ -1,17 +1,17 @@
 <?php
 /*
 Plugin Name: Advanced Custom Fields: Field Boilerplate
-Plugin URI: https://github.com/log1x/acf-field-boilerplate
-Description: A simple ACF Field Type boilerplate to quickly make clean, well structured custom field types.
-Version: 1.0.0
-Author: Brandon Nifong
-Author URI: https://log1x.com
+Plugin URI:  https://github.com/log1x/acf-field-boilerplate
+Description: A better ACF Field Type boilerplate
+Version:     1.0.0
+Author:      Brandon Nifong
+Author URI:  https://log1x.com
 
-License: MIT License
+License:     MIT License
 License URI: http://opensource.org/licenses/MIT
 */
 
-namespace Acf\Field\Boilerplate;
+namespace App\MyField;
 
 /**
  * Return if Field Loader already exists.
@@ -25,6 +25,15 @@ if (class_exists('FieldLoader')) {
  */
 class FieldLoader
 {
+    /**
+     * Fields to load
+     *
+     * @var array
+     */
+    protected $fields = [
+        'example',
+    ];
+
     /**
      * Constructor
      */
@@ -49,7 +58,11 @@ class FieldLoader
      */
     public function fields($version = 5)
     {
-        include_once('fields/example.php');
+        foreach ($this->fields as $field) {
+            if (file_exists($field = "fields/{$field}.php")) {
+                require_once($field);
+            }
+        }
     }
 }
 
