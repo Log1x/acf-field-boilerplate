@@ -1,34 +1,64 @@
 <?php
 
-namespace App\MyField\Fields;
+namespace Log1x\ExampleField\Fields;
+
+use IlluminateAgnostic\Str\Support\Str;
 
 /**
- * Return if Example Field already exists.
+ * Return if Example already exists.
  */
 if (class_exists('Example')) {
     return;
 }
 
 /**
- * Example Field
+ * Example field
  */
 class Example extends \acf_field
 {
+    /**
+     * Field Label
+     *
+     * @var string
+     */
+    var $label = 'Example Field';
+
+    /**
+     * Field Category
+     *
+     * @var string
+     */
+    var $category = 'basic';
+
+    /**
+     * Field Defaults
+     *
+     * @param array
+     */
+    var $defaults = [
+        'placeholder' => '',
+        'prepend'     => '',
+        'append'      => '',
+    ];
+
+    /**
+     * Enqueue Assets
+     *
+     * When enabled, field styles and javascript
+     * are enqueued when field is present.
+     *
+     * @param boolean
+     */
+    protected $assets = false;
+
     /**
      * Constructor
      */
     public function __construct($settings)
     {
-        $this->name     = 'example_field';
-        $this->label    = __('Example Field', 'acf-field-boilerplate');
-        $this->category = 'basic';
-        $this->defaults = [
-            'placeholder' => '',
-            'prepend'     => '',
-            'append'      => '',
-        ];
-		$this->l10n     = [];
-        $this->settings = $settings;
+        $this->name = Str::snake($this->label);
+        $this->slug = Str::slug($this->label);
+        $this->url  = $settings['url'];
 
         parent::__construct();
     }
@@ -43,26 +73,26 @@ class Example extends \acf_field
     {
         /** Placeholder */
         acf_render_field_setting($field, [
-            'label'            => __('Placeholder Text', 'acf-field-boilerplate'),
-            'instructions'    => __('Appears within the input', 'acf-field-boilerplate'),
-            'type'            => 'text',
-            'name'            => 'placeholder',
+            'label'        => 'Placeholder Text',
+            'instructions' => 'Appears within the input',
+            'type'         => 'text',
+            'name'         => 'placeholder',
         ]);
 
         /** Prepend */
         acf_render_field_setting($field, [
-            'label'            => __('Prepend', 'acf-field-boilerplate'),
-            'instructions'    => __('Appears before the input', 'acf-field-boilerplate'),
-            'type'            => 'text',
-            'name'            => 'prepend',
+            'label'        => 'Prepend',
+            'instructions' => 'Appears before the input',
+            'type'         => 'text',
+            'name'         => 'prepend',
         ]);
 
         /** Append */
         acf_render_field_setting($field, [
-            'label'            => __('Append', 'acf-field-boilerplate'),
-            'instructions'    => __('Appears after the input', 'acf-field-boilerplate'),
-            'type'            => 'text',
-            'name'            => 'append',
+            'label'        => 'Append',
+            'instructions' => 'Appears after the input',
+            'type'         => 'text',
+            'name'         => 'append',
         ]);
     }
 
@@ -83,14 +113,15 @@ class Example extends \acf_field
      *
      * @return void
      */
-    // public function input_admin_enqueue_scripts()
-    // {
-    //     wp_register_script('acf-input-field-boilerplate', "{$this->settings['url']}dist/scripts/main.js", ['acf-input'], $this->settings['version']);
-    //     wp_enqueue_script('acf-input-field-boilerplate');
-    //
-    //     wp_register_style('acf-input-field-boilerplate', "{$this->settings['url']}dist/styles/main.css", ['acf-input'], $this->settings['version']);
-    //     wp_enqueue_style('acf-input-field-boilerplate');
-    // }
+    public function input_admin_enqueue_scripts()
+    {
+        if (! $this->assets) {
+            return;
+        }
+
+        wp_enqueue_script('acf-'.$this->slug, $this->url . 'dist/js/field.js', null, null, true);
+        wp_enqueue_style('acf-'.$this->slug, $this->url . 'dist/css/field.css', false, null);
+    }
 
     /**
      * This action is called in the admin_head action on the edit screen where your field is created.
@@ -100,7 +131,12 @@ class Example extends \acf_field
      */
     // public function input_admin_head()
     // {
+    //     if (! $this->assets) {
+    //         return;
+    //     }
     //
+    //     wp_enqueue_script('acf-'.$this->slug, $this->url . 'dist/js/field.js', null, null, true);
+    //     wp_enqueue_style('acf-'.$this->slug, $this->url . 'dist/css/field.css', false, null);
     // }
 
     /**
@@ -178,14 +214,12 @@ class Example extends \acf_field
     // }
 
     /**
-     *  format_value()
+     * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
      *
-     *  This filter is appied to the $value after it is loaded from the db and before it is returned to the template
-     *
-     *  @param  mixed $value
-     *  @param  mixed $post_id
-     *  @param  array $field
-     *  @return mixed
+     * @param  mixed $value
+     * @param  mixed $post_id
+     * @param  array $field
+     * @return mixed
      */
     // public function format_value($value, $post_id, $field)
     // {
@@ -193,17 +227,15 @@ class Example extends \acf_field
     // }
 
     /*
-    *  validate_value()
+    * This filter is used to perform validation on the value prior to saving.
+    * All values are validated regardless of the field's required setting. This allows you to validate and return
+    * messages to the user if the value is not correct
     *
-    *  This filter is used to perform validation on the value prior to saving.
-    *  All values are validated regardless of the field's required setting. This allows you to validate and return
-    *  messages to the user if the value is not correct
-    *
-    *  @param  boolean $valid
-    *  @param  mixed   $value
-    *  @param  array   $field
-    *  @param  array   $input
-    *  @return boolean
+    * @param  boolean $valid
+    * @param  mixed   $value
+    * @param  array   $field
+    * @param  array   $input
+    * @return boolean
     */
     // public function validate_value($valid, $value, $field, $input)
     // {
@@ -257,4 +289,4 @@ class Example extends \acf_field
     // }
 }
 
-new ExampleField($this->settings);
+new Example($this->settings);
