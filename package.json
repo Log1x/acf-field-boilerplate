@@ -6,13 +6,12 @@
     "clean": "npm run -s clean:dist",
     "clean:dist": "rimraf dist"
   },
-  "engines": {
-    "node": ">= 6.9.4"
-  },
   "devDependencies": {
     "cross-env": "^5.2.0",
     "laravel-mix": "^4.0.16",
     "rimraf": "^2.6.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "jquery": "^3.4.1"
+  }
 }

@@ -11,36 +11,7 @@ const mix = require('laravel-mix');
  |
  */
 
-const assets    = 'resources/assets';
-const dist      = 'dist';
+mix.setPublicPath('./dist');
 
-mix.setPublicPath(dist);
-mix.setResourceRoot('../');
-
-// Styles
-// mix.sass(
-//   `${assets}/styles/main.scss`,
-//   `${dist}/styles/main.css`
-// );
-
-// Javascript
-// mix.js(
-//   `${assets}/scripts/main.js`,
-//   `${dist}/scripts`
-// );
-
-// Assets
-// mix.copyDirectory(
-//   `${assets}/images`,
-//   `${dist}/images`
-// );
-
-// Source maps when not in production.
-// if (!mix.inProduction()) {
-//   mix.sourceMaps();
-// }
-
-// Hash and version files in production.
-// if (mix.inProduction()) {
-//   mix.version();
-// }
+mix.js('assets/js/field.js', 'dist/js')
+   .sass('assets/css/field.scss', 'dist/css');
