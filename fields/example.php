@@ -2,8 +2,6 @@
 
 namespace Log1x\ExampleField\Fields;
 
-use IlluminateAgnostic\Str\Support\Str;
-
 /**
  * Return if Example already exists.
  */
@@ -17,11 +15,11 @@ if (class_exists('Example')) {
 class Example extends \acf_field
 {
     /**
-     * Field Label
+     * Field Name
      *
      * @var string
      */
-    var $label = 'Example Field';
+     var $name = 'Example Field';
 
     /**
      * Field Category
@@ -56,8 +54,7 @@ class Example extends \acf_field
      */
     public function __construct($settings)
     {
-        $this->name = Str::snake($this->label);
-        $this->slug = Str::slug($this->label);
+        $this->slug = sanitize_title($this->name);
         $this->url  = $settings['url'];
 
         parent::__construct();
