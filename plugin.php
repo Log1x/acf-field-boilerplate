@@ -3,7 +3,7 @@
 Plugin Name: Advanced Custom Fields: Field Boilerplate
 Plugin URI:  https://github.com/log1x/acf-field-boilerplate
 Description: A better ACF Field Boilerplate.
-Version:     1.0.3
+Version:     1.0.4
 Author:      Brandon Nifong
 Author URI:  https://log1x.com
 */
