@@ -2,60 +2,56 @@
 
 namespace Log1x\ExampleField\Fields;
 
-/**
- * Return if Example already exists.
- */
-if (class_exists('Example')) {
-    return;
-}
-
-/**
- * Example field
- */
-class Example extends \acf_field
+class ExampleField extends \acf_field
 {
     /**
      * Field Name
      *
      * @var string
      */
-     var $name = 'Example Field';
+    public $name = 'example_field';
+
+    /**
+     * Field Label
+     *
+     * @var string
+     */
+    public $label = 'Example Field';
 
     /**
      * Field Category
      *
      * @var string
      */
-    var $category = 'basic';
+    public $category = 'basic';
 
     /**
      * Field Defaults
      *
-     * @param array
+     * @var array
      */
-    var $defaults = [
+    public $defaults = [
         'placeholder' => '',
         'prepend'     => '',
         'append'      => '',
     ];
 
     /**
-     * Enqueue Assets
+     * Enable/Disable Enqueuing Assets
      *
-     * When enabled, field styles and javascript
-     * are enqueued when field is present.
-     *
-     * @param boolean
+     * @var boolean
      */
-    protected $assets = false;
+    public $assets = false;
 
     /**
-     * Constructor
+     * Create a new instance of ExampleField.
+     *
+     * @param  array $settings
+     * @return void
      */
     public function __construct($settings)
     {
-        $this->slug = sanitize_title($this->name);
-        $this->url  = $settings['url'];
+        $this->settings = (object) $settings;
 
         parent::__construct();
     }
@@ -94,7 +90,7 @@ class Example extends \acf_field
     }
 
     /**
-     * Create the HTML interface for your field
+     * Create the HTML interface for your field.
      *
      * @param  array $field
      * @return void
@@ -105,8 +101,8 @@ class Example extends \acf_field
     }
 
     /**
-     * This action is called in the admin_enqueue_scripts action on the edit screen where your field is created.
-     * Use this action to add CSS + JavaScript to assist your render_field() action.
+     * This action is called in the admin_enqueue_scripts action on the edit screen where
+     * your field is created.
      *
      * @return void
      */
@@ -116,13 +112,13 @@ class Example extends \acf_field
             return;
         }
 
-        wp_enqueue_script('acf-'.$this->slug, $this->url . 'dist/js/field.js', null, null, true);
-        wp_enqueue_style('acf-'.$this->slug, $this->url . 'dist/css/field.css', false, null);
+        wp_enqueue_script('acf-' . $this->name, $this->settings->url . 'dist/js/field.js', null, null, true);
+        wp_enqueue_style('acf-' . $this->name, $this->settings->url . 'dist/css/field.css', false, null);
     }
 
     /**
-     * This action is called in the admin_head action on the edit screen where your field is created.
-     * Use this action to add CSS and JavaScript to assist your render_field() action.
+     * This action is called in the admin_head action on the edit screen where your
+     * field is created.
      *
      * @return void
      */
@@ -132,16 +128,12 @@ class Example extends \acf_field
     //         return;
     //     }
     //
-    //     wp_enqueue_script('acf-'.$this->slug, $this->url . 'dist/js/field.js', null, null, true);
-    //     wp_enqueue_style('acf-'.$this->slug, $this->url . 'dist/css/field.css', false, null);
+    //     wp_enqueue_script('acf-' . $this->name, $this->settings->url . 'dist/js/field.js', null, null, true);
+    //     wp_enqueue_style('acf-' . $this->name, $this->settings->url . 'dist/css/field.css', false, null);
     // }
 
     /**
-     * This function is called once on the 'input' page between the head and footer
-     * There are 2 situations where ACF did not load during the 'acf/input_admin_enqueue_scripts' and
-     * 'acf/input_admin_head' actions because ACF did not know it was going to be used. These situations are
-     * seen on comments / user edit forms on the front end. This function will always be called, and includes
-     * $args that related to the current screen such as $args['post_id']
+     * This function is called when the input form is on the current screen.
      *
      * @param  array $args
      * @return void
@@ -152,8 +144,8 @@ class Example extends \acf_field
     // }
 
     /**
-     * This action is called in the admin_footer action on the edit screen where your field is created.
-     * Use this action to add CSS and JavaScript to assist your render_field() action.
+     * This action is called in the admin_footer action on the edit screen where your
+     * field is created.
      *
      * @return void
      */
@@ -163,8 +155,8 @@ class Example extends \acf_field
     // }
 
     /**
-     * This action is called in the admin_enqueue_scripts action on the edit screen where your field is edited.
-     * Use this action to add CSS + JavaScript to assist your render_field_options() action.
+     * This action is called in the admin_enqueue_scripts action on the edit screen
+     * where your field is edited.
      *
      * @return void
      */
@@ -174,8 +166,8 @@ class Example extends \acf_field
     // }
 
     /**
-     * This action is called in the admin_head action on the edit screen where your field is edited.
-     * Use this action to add CSS and JavaScript to assist your render_field_options() action.
+     * This action is called in the admin_head action on the edit screen where your
+     * field is edited.
      *
      * @return void
      */
@@ -211,7 +203,8 @@ class Example extends \acf_field
     // }
 
     /**
-     * This filter is appied to the $value after it is loaded from the db and before it is returned to the template
+     * This filter is applied to the $value after it is loaded from the database and
+     * before it is returned to the template.
      *
      * @param  mixed $value
      * @param  mixed $post_id
@@ -223,25 +216,22 @@ class Example extends \acf_field
     //     return $value;
     // }
 
-    /*
-    * This filter is used to perform validation on the value prior to saving.
-    * All values are validated regardless of the field's required setting. This allows you to validate and return
-    * messages to the user if the value is not correct
-    *
-    * @param  boolean $valid
-    * @param  mixed   $value
-    * @param  array   $field
-    * @param  array   $input
-    * @return boolean
-    */
+    /**
+     * This filter is used to perform validation on the value prior to saving.
+     *
+     * @param  boolean $valid
+     * @param  mixed   $value
+     * @param  array   $field
+     * @param  array   $input
+     * @return boolean
+     */
     // public function validate_value($valid, $value, $field, $input)
     // {
     //     return $valid;
     // }
 
     /**
-     * This action is fired after a value has been deleted from the db.
-     * Please note that saving a blank value is treated as an update, not a delete
+     * This action is fired after a value has been deleted from the database.
      *
      * @param  mixed  $post_id
      * @param  string $key
@@ -253,7 +243,7 @@ class Example extends \acf_field
     // }
 
     /**
-     * This filter is applied to the $field after it is loaded from the database
+     * This filter is applied to the $field after it is loaded from the database.
      *
      * @param  array $field
      * @return array
@@ -264,7 +254,7 @@ class Example extends \acf_field
     // }
 
     /**
-     * This filter is applied to the $field before it is saved to the database
+     * This filter is applied to the $field before it is saved to the database.
      *
      * @param  array $field
      * @return array
@@ -275,7 +265,7 @@ class Example extends \acf_field
     // }
 
     /**
-     * This action is fired after a field is deleted from the database
+     * This action is fired after a field is deleted from the database.
      *
      * @param  array $field
      * @return void
@@ -285,5 +275,3 @@ class Example extends \acf_field
     //     return $field;
     // }
 }
-
-new Example($this->settings);

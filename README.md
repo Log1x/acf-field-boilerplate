@@ -10,10 +10,12 @@ This is entirely based off of the original [acf-field-type-template](https://git
 ## Features
 
 * [Laravel Mix](https://laravelmix.com) for handling assets.
-* PSR-2 coding style
+* PSR-12 code style & linting
 * Namespacing
 * Cleaner DocBlocks
 * Cleaner directory structure
+* Field autoloader
+* Ready to use alongside other Composer packages
 * Attempt at a more DRY approach
 
 ## Requirements
@@ -26,16 +28,19 @@ Make sure all dependencies have been installed before moving on:
 * [Node.js](http://nodejs.org/) >= 6.9.x
 * [Yarn](https://yarnpkg.com/en/docs/install)
 
-## Boilerplate installation
+## Getting Started
 
-Install ACF Field Boilerplate using Composer:
+Create a project using Composer:
 
+```bash
+$ composer create-project log1x/acf-field-boilerplate:dev-master my-field
 ```
-$ composer create-project log1x/acf-field-boilerplate:dev-master
-```
+
 ## Field development
 
-* Run `yarn` from the boilerplate directory to install dependencies
+* Run `yarn install` from the field directory to install dependencies.
+* Replace all instances of `Log1x/ExampleField` with your namespace.
+* Use `ExampleField.php` to get started.
 
 ### Build commands
 
@@ -43,3 +48,15 @@ $ composer create-project log1x/acf-field-boilerplate:dev-master
 * `yarn run build:production` — Compile assets for production
 
 After you have your project created, simply go through and change the namespace to your field name and use the provided `fields/example.php` to quickly get started.
+
+## Bug Reports
+
+If you discover a bug in ACF Field Boilerplate, please [open an issue](https://github.com/log1x/acf-field-boilerplate/issues).
+
+## Contributing
+
+Contributing whether it be through PRs, reporting an issue, or suggesting an idea is encouraged and appreciated.
+
+## License
+
+ACF Field Boilerplate is provided under the [MIT License](https://github.com/log1x/acf-field-boilerplate/blob/master/LICENSE.md).
