@@ -1,6 +1,7 @@
 # ACF Field Boilerplate
 
 [![Packagist](https://img.shields.io/packagist/v/log1x/acf-field-boilerplate.svg?style=flat-square)](https://packagist.org/packages/log1x/acf-field-boilerplate)
+![CircleCI](https://img.shields.io/circleci/build/gh/Log1x/acf-field-boilerplate.svg?style=flat-square)
 [![Packagist Downloads](https://img.shields.io/packagist/dt/log1x/acf-field-boilerplate.svg?style=flat-square)](https://packagist.org/packages/log1x/acf-field-boilerplate)
 
 This is an ACF Field Type boilerplate to quickly make clean, well structured custom field types.
