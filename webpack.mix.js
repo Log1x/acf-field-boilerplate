@@ -15,3 +15,11 @@ mix.setPublicPath('./dist');
 
 mix.js('assets/js/field.js', 'dist/js')
    .sass('assets/css/field.scss', 'dist/css');
+
+mix.autoload({
+  jquery: ['$', 'window.jQuery'],
+});
+
+mix.options({
+  processCssUrls: false,
+});
