@@ -41,14 +41,12 @@ $ composer create-project log1x/acf-field-boilerplate:dev-master my-field
 
 * Run `yarn install` from the field directory to install dependencies.
 * Replace all instances of `Log1x/ExampleField` with your namespace.
-* Use `ExampleField.php` to get started.
+* Use `Fields/ExampleField.php` to get started.
 
 ### Build commands
 
 * `yarn run build` — Compile and optimize the files in your assets directory
 * `yarn run build:production` — Compile assets for production
-
-After you have your project created, simply go through and change the namespace to your field name and use the provided `fields/example.php` to quickly get started.
 
 ## Bug Reports
 
