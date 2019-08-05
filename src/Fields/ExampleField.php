@@ -131,12 +131,7 @@ class ExampleField extends \acf_field
      */
     // public function input_admin_head()
     // {
-    //     if (! $this->assets) {
-    //         return;
-    //     }
-    //
-    //     wp_enqueue_script('acf-' . $this->name, $this->settings->url . 'dist/js/field.js', null, null, true);
-    //     wp_enqueue_style('acf-' . $this->name, $this->settings->url . 'dist/css/field.css', false, null);
+    // 
     // }
 
     /**
