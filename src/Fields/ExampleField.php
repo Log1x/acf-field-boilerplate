@@ -44,6 +44,13 @@ class ExampleField extends \acf_field
     public $assets = false;
 
     /**
+     * Settings
+     *
+     * @var object
+     */
+    private $settings;
+
+    /**
      * Create a new instance of ExampleField.
      *
      * @param  array $settings
@@ -112,8 +119,8 @@ class ExampleField extends \acf_field
             return;
         }
 
-        wp_enqueue_script('acf-' . $this->name, $this->settings->url . 'dist/js/field.js', null, null, true);
-        wp_enqueue_style('acf-' . $this->name, $this->settings->url . 'dist/css/field.css', false, null);
+        wp_enqueue_script('acf-' . $this->name, $this->settings->url . 'dist/js/field.js', [], null, true);
+        wp_enqueue_style('acf-' . $this->name, $this->settings->url . 'dist/css/field.css', [], null);
     }
 
     /**
