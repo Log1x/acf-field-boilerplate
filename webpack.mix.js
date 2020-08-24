@@ -11,15 +11,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.setPublicPath('./dist');
-
-mix.js('assets/js/field.js', 'dist/js')
-   .sass('assets/css/field.scss', 'dist/css');
-
-mix.autoload({
-  jquery: ['$', 'window.jQuery'],
-});
-
-mix.options({
-  processCssUrls: false,
-});
+mix
+  .setPublicPath('./public')
+  .js('assets/js/field.js', 'public/js')
+  .sass('assets/css/field.scss', 'public/css')
+  .autoload({ jquery: ['$', 'window.jQuery'] })
+  .options({
+    processCssUrls: false,
+    postCss: [require('tailwindcss')('./tailwind.config.js')]
+  })
+  .version();

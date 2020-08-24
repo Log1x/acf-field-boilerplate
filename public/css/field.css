@@ -1,0 +1,14 @@
+.acf-field-example-field .acf-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acf-field-example-field .acf-input .acf-example-field-input {
+  width: 50%;
+  margin-right: 1.5rem;
+}
+
+.acf-field-example-field .acf-input .acf-example-field-input:last-child {
+  margin-right: 0;
+}

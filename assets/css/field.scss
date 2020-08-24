@@ -1,3 +1,13 @@
-// .acf-field-example-field {
-//
-// }
+.acf-field-example-field {
+  .acf-input {
+    @apply flex items-center justify-center;
+
+    .acf-example-field-input {
+      @apply w-1/2 mr-6;
+
+      &:last-child {
+        @apply mr-0;
+      }
+    }
+  }
+}

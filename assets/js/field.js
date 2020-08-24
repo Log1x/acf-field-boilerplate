@@ -1,25 +1,18 @@
-/**
- * Import local dependencies
- */
-import Ready from './events/ready';
+;(function ($) {
+  if (typeof acf.add_action === 'undefined') {
+    return
+  }
 
-/**
- * Field
- */
-const field =  {
-  name: 'example_field',
-};
-
-/**
- * Initialize Events
- */
-const events = () => {
-  Ready.init(field);
-}
-
-/**
- * Load Events
- */
-if (typeof acf.add_action !== 'undefined') {
-  jQuery(document).ready(() => events);
-}
+  /**
+   * The hook below is fired when a document potentially containing
+   * the example field is finished loading or has had an element
+   * appended.
+   *
+   * @param {jQuery} element
+   */
+  acf.add_action('ready append', function (element) {
+    acf.get_fields({ type: 'example_field' }, element).each(function () {
+      // console.log($(this))
+    })
+  })
+})(jQuery)
