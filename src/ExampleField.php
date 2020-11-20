@@ -2,35 +2,33 @@
 
 namespace Log1x\AcfFieldBoilerplate;
 
-use Log1x\AcfFieldBoilerplate\Concerns\AssetManifest;
-
 class ExampleField extends \acf_field
 {
-    use AssetManifest;
+    use Concerns\AssetManifest;
 
     /**
-     * Field Name
+     * The field name.
      *
      * @var string
      */
     public $name = 'example_field';
 
     /**
-     * Field Label
+     * The field label.
      *
      * @var string
      */
     public $label = 'Example Field';
 
     /**
-     * Field Category
+     * The field category.
      *
      * @var string
      */
     public $category = 'basic';
 
     /**
-     * Field Defaults
+     * The field defaults.
      *
      * @var array
      */

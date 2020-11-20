@@ -11,12 +11,18 @@
 
 namespace Log1x\AcfFieldBoilerplate;
 
-if (file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
-    require $composer;
-}
-
-add_filter('plugins_loaded', new class
+add_filter('after_setup_theme', new class
 {
+    /**
+     * The ACF field registration hooks.
+     *
+     * @return array
+     */
+    protected $hooks = [
+        'acf/include_field_types',
+        'acf/register_fields',
+    ];
+
     /**
      * Invoke the plugin.
      *
@@ -24,13 +30,55 @@ add_filter('plugins_loaded', new class
      */
     public function __invoke()
     {
-        foreach (['acf/include_field_types', 'acf/register_fields'] as $hook) {
+        if (! class_exists('\ACF')) {
+            return;
+        }
+
+        require_once file_exists($composer = __DIR__ . '/vendor/autoload.php') ?
+            $composer :
+            __DIR__ . '/dist/autoload.php';
+
+        $this->register();
+        $this->hookAdminColumns();
+    }
+
+    /**
+     * Register the field type with ACF.
+     *
+     * @return void
+     */
+    protected function register()
+    {
+        foreach ($this->hooks as $hook) {
             add_filter($hook, function () {
                 return new ExampleField(
-                    plugin_dir_url(__FILE__) . 'public',
-                    plugin_dir_path(__FILE__) . 'public'
+                    plugin_dir_url(__FILE__)
+                    plugin_dir_path(__FILE__)
                 );
             });
         }
+    }
+
+    /**
+     * Hook the Admin Columns Pro plugin to provide basic field support.
+     *
+     * @return void
+     */
+    protected function hookAdminColumns()
+    {
+        if (! defined('ACP_FILE')) {
+            return;
+        }
+
+        add_filter('ac/column/value', function ($value, $id, $column) {
+            if (
+                ! is_a($column, '\ACA\ACF\Column') ||
+                $column->get_acf_field_option('type') !== 'example_field'
+            ) {
+                return $value;
+            }
+
+            return get_field($column->get_meta_key()) ?? $value;
+        }, 10, 3);
     }
 });
