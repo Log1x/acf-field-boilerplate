@@ -13,20 +13,12 @@ namespace Log1x\AcfFieldBoilerplate;
 
 add_filter('after_setup_theme', new class
 {
-
     /**
-     * The asset URI.
+     * The field assets.
      *
-     * @var string
+     * @var array
      */
-    protected $uri;
-
-    /**
-     * The asset path.
-     *
-     * @var string
-     */
-    protected $path;
+    protected $assets = ['field.css', 'field.js'];
 
     /**
      * The ACF field registration hooks.
@@ -67,8 +59,9 @@ add_filter('after_setup_theme', new class
         foreach ($this->hooks as $hook) {
             add_filter($hook, function () {
                 return new ExampleField(
-                    plugin_dir_url(__FILE__)
-                    plugin_dir_path(__FILE__)
+                    plugin_dir_url(__FILE__),
+                    plugin_dir_path(__FILE__),
+                    $this->assets
                 );
             });
         }

@@ -7,46 +7,48 @@ class ExampleField extends \acf_field
     use Concerns\AssetManifest;
 
     /**
-     * The field configuration.
+     * The field label.
+     *
+     * @var string
+     */
+    public $label = 'Example Field';
+
+    /**
+     * The field name.
+     *
+     * @var string
+     */
+    public $name = 'example_field';
+
+    /**
+     * The field category.
+     *
+     * @var string
+     */
+    public $category = 'basic';
+
+    /**
+     * The field defaults.
      *
      * @var array
      */
-    protected $field = [
-        'label' => 'Example Field',
-        'category' => 'basic',
+    public $defaults = [
+        'return_format' => 'array',
     ];
-
-    /**
-     * The asset URI.
-     *
-     * @var string
-     */
-    protected $uri;
-
-    /**
-     * The asset path.
-     *
-     * @var string
-     */
-    protected $path;
 
     /**
      * Create a new example field instance.
      *
      * @param  string $uri
      * @param  string $path
+     * @param  array  $assets
      * @return void
      */
-    public function __construct($uri, $path)
+    public function __construct($uri, $path, $assets = [])
     {
-        foreach ($this->field as $key => $value) {
-            $this->{$key} = $value;
-        }
-
-        $this->name = str_replace('_', '-', sanitize_title($this->name));
-
-        $this->uri = trailingslashit($uri);
-        $this->path = trailingslashit($path);
+        $this->uri = $uri;
+        $this->path = $path;
+        $this->assets = $assets;
 
         parent::__construct();
     }
@@ -66,8 +68,8 @@ class ExampleField extends \acf_field
             'type' => 'select',
             'ui' => '1',
             'choices' => [
-                ['array' => 'Array'],
-                ['string' => 'String'],
+                'array' => 'Array',
+                'string' => 'String',
             ],
         ]);
     }
@@ -139,10 +141,11 @@ class ExampleField extends \acf_field
      */
     public function format_value($value, $post_id, $field)
     {
-        $value = (object) $value;
-
-        if ($value->return_format === 'string') {
-            return implode(' ', [$value['firstName'], $value['lastName']]);
+        if ($value['return_format'] === 'string') {
+            return implode(' ', [
+                $value['firstName'],
+                $value['lastName']
+            ]);
         }
 
         return $value;
@@ -208,17 +211,6 @@ class ExampleField extends \acf_field
     }
 
     /**
-     * Enqueued assets when rendering the field type.
-     *
-     * @return void
-     */
-    public function input_admin_enqueue_scripts()
-    {
-        wp_enqueue_script('acf-' . $this->name, $this->asset('/js/field.js'), ['acf-field'], null, true);
-        wp_enqueue_style('acf-' . $this->name, $this->asset('/css/field.css'), [], null);
-    }
-
-    /**
      * Printed output in the admin header when rendering the field type.
      *
      * @return void
@@ -245,16 +237,6 @@ class ExampleField extends \acf_field
      * @return void
      */
     public function input_admin_footer()
-    {
-        //
-    }
-
-    /**
-     * Enqueued assets when creating a field group.
-     *
-     * @return void
-     */
-    public function field_group_admin_enqueue_scripts()
     {
         //
     }
