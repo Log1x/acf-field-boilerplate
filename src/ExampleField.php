@@ -7,33 +7,13 @@ class ExampleField extends \acf_field
     use Concerns\AssetManifest;
 
     /**
-     * The field name.
-     *
-     * @var string
-     */
-    public $name = 'example_field';
-
-    /**
-     * The field label.
-     *
-     * @var string
-     */
-    public $label = 'Example Field';
-
-    /**
-     * The field category.
-     *
-     * @var string
-     */
-    public $category = 'basic';
-
-    /**
-     * The field defaults.
+     * The field configuration.
      *
      * @var array
      */
-    public $defaults = [
-        'placeholder' => '',
+    protected $field = [
+        'label' => 'Example Field',
+        'category' => 'basic',
     ];
 
     /**
@@ -59,6 +39,12 @@ class ExampleField extends \acf_field
      */
     public function __construct($uri, $path)
     {
+        foreach ($this->field as $key => $value) {
+            $this->{$key} = $value;
+        }
+
+        $this->name = str_replace('_', '-', sanitize_title($this->name));
+
         $this->uri = trailingslashit($uri);
         $this->path = trailingslashit($path);
 

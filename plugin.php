@@ -13,6 +13,21 @@ namespace Log1x\AcfFieldBoilerplate;
 
 add_filter('after_setup_theme', new class
 {
+
+    /**
+     * The asset URI.
+     *
+     * @var string
+     */
+    protected $uri;
+
+    /**
+     * The asset path.
+     *
+     * @var string
+     */
+    protected $path;
+
     /**
      * The ACF field registration hooks.
      *
@@ -60,7 +75,7 @@ add_filter('after_setup_theme', new class
     }
 
     /**
-     * Hook the Admin Columns Pro plugin to provide basic field support.
+     * Provide basic field support to Admin Columns Pro.
      *
      * @return void
      */
