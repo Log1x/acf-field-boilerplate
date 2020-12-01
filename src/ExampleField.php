@@ -61,11 +61,14 @@ class ExampleField extends \acf_field
     {
         acf_render_field_setting($field, [
             'label' => 'Return Format',
+            'name' => 'return_format',
             'instructions' => 'The format of the returned data.',
             'type' => 'select',
             'ui' => '1',
-            'choices' => [['object' => 'Object'], ['string' => 'String']],
-            'name' => 'return_format',
+            'choices' => [
+                ['array' => 'Array'],
+                ['string' => 'String'],
+            ],
         ]);
     }
 
