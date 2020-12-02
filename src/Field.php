@@ -21,7 +21,7 @@ class Field extends \acf_field
      * @param  callable $plugin
      * @return void
      */
-    public function __construct(Callable $plugin)
+    public function __construct(callable $plugin)
     {
         $this->label = $plugin->label;
         $this->name = $plugin->name;
