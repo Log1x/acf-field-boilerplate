@@ -1,7 +1,7 @@
 {
   "name": "log1x/acf-field-boilerplate",
   "type": "wordpress-plugin",
-  "description": "A modernized starting point for custom ACF field types.",
+  "description": "A modernized starting point for custom Advanced Custom Fields field types.",
   "keywords": [
     "acf",
     "acf-field",
@@ -17,7 +17,7 @@
   },
   "autoload": {
     "psr-4": {
-      "Log1x\\AcfFieldBoilerplate\\": "src/"
+      "Log1x\\AcfExampleField\\": "src/"
     }
   },
   "scripts": {

@@ -9,26 +9,44 @@
  * Author URI:  https://github.com/log1x
  */
 
-namespace Log1x\AcfFieldBoilerplate;
+namespace Log1x\AcfExampleField;
 
 add_filter('after_setup_theme', new class
 {
-    /**
-     * The field assets.
+   /**
+     * The field label.
      *
-     * @var array
+     * @var string
      */
-    protected $assets = ['field.css', 'field.js'];
+    public $label = 'Example Field';
 
     /**
-     * The ACF field registration hooks.
+     * The field name.
      *
-     * @return array
+     * @var string
      */
-    protected $hooks = [
-        'acf/include_field_types',
-        'acf/register_fields',
-    ];
+    public $name = 'example_field';
+
+    /**
+     * The field category.
+     *
+     * @var string
+     */
+    public $category = 'basic';
+
+    /**
+     * The field asset URI.
+     *
+     * @var string
+     */
+    public $uri;
+
+    /**
+     * The field asset path.
+     *
+     * @var string
+     */
+    public $path = 'public/';
 
     /**
      * Invoke the plugin.
@@ -41,12 +59,15 @@ add_filter('after_setup_theme', new class
             return;
         }
 
+        $this->uri = plugin_dir_url(__FILE__) . $this->path;
+        $this->path = plugin_dir_path(__FILE__) . $this->path;
+
         require_once file_exists($composer = __DIR__ . '/vendor/autoload.php') ?
             $composer :
             __DIR__ . '/dist/autoload.php';
 
         $this->register();
-        $this->hookAdminColumns();
+        $this->registerAdminColumns();
     }
 
     /**
@@ -56,23 +77,19 @@ add_filter('after_setup_theme', new class
      */
     protected function register()
     {
-        foreach ($this->hooks as $hook) {
+        foreach (['acf/include_field_types', 'acf/register_fields'] as $hook) {
             add_filter($hook, function () {
-                return new ExampleField(
-                    plugin_dir_url(__FILE__),
-                    plugin_dir_path(__FILE__),
-                    $this->assets
-                );
+                return new Field($this);
             });
         }
     }
 
     /**
-     * Provide basic field support to Admin Columns Pro.
+     * Register the field type with ACP.
      *
      * @return void
      */
-    protected function hookAdminColumns()
+    protected function registerAdminColumns()
     {
         if (! defined('ACP_FILE')) {
             return;
@@ -81,12 +98,12 @@ add_filter('after_setup_theme', new class
         add_filter('ac/column/value', function ($value, $id, $column) {
             if (
                 ! is_a($column, '\ACA\ACF\Column') ||
-                $column->get_acf_field_option('type') !== 'example_field'
+                $column->get_acf_field_option('type') !== $this->name
             ) {
                 return $value;
             }
 
-            return get_field($column->get_meta_key()) ?? $value;
+            return get_field($column->get_meta_key()) ?: $value;
         }, 10, 3);
     }
 });

@@ -15,7 +15,6 @@ This is entirely based off of the original [acf-field-type-template](https://git
 - Namespacing
 - Cleaner DocBlocks
 - Cleaner directory structure
-- Field autoloader
 - Ready to use alongside other Composer packages
 - Attempt at a more DRY approach
 
