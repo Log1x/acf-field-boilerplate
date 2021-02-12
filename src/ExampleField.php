@@ -214,8 +214,8 @@ class ExampleField extends \acf_field
      */
     public function input_admin_enqueue_scripts()
     {
-        wp_enqueue_style($this->name, $this->asset('css/field.css'), [], null);
-        wp_enqueue_script($this->name, $this->asset('js/field.js'), [], null, true);
+        wp_enqueue_script('acf-' . $this->name, $this->asset('/js/field.js'), ['acf-input'], null);
+        wp_enqueue_style('acf-' . $this->name, $this->asset('/css/field.css'), [], null);
     }
 
     /**

@@ -10,14 +10,14 @@ trait Asset
      * @param  string $asset
      * @return string
      */
-    public function asset($asset = null)
+    public function asset($asset = null, $path = 'public')
     {
         if (! file_exists($manifest = $this->path . 'public/mix-manifest.json')) {
-            return $this->uri . $asset;
+            return $this->uri . $path . $asset;
         }
 
         $manifest = json_decode(file_get_contents($manifest), true);
 
-        return $this->uri . ($manifest[$asset] ?? $asset);
+        return $this->uri . $path . ($manifest[$asset] ?? $asset);
     }
 }
