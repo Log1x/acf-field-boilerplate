@@ -13,8 +13,8 @@ const mix = require('laravel-mix');
 
 mix
   .setPublicPath('./public')
-  .js('assets/js/field.js', 'public/js')
-  .sass('assets/css/field.scss', 'public/css')
+  .sass('resources/css/field.scss', 'css')
+  .js('resources/js/field.js', 'js')
   .autoload({ jquery: ['$', 'window.jQuery'] })
   .options({
     processCssUrls: false,

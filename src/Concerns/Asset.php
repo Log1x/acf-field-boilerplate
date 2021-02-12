@@ -12,7 +12,7 @@ trait Asset
      */
     public function asset($asset = null)
     {
-        if (! file_exists($manifest = $this->path . 'mix-manifest.json')) {
+        if (! file_exists($manifest = $this->path . 'public/mix-manifest.json')) {
             return $this->uri . $asset;
         }
 

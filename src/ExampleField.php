@@ -2,32 +2,49 @@
 
 namespace Log1x\AcfExampleField;
 
-class Field extends \acf_field
+class ExampleField extends \acf_field
 {
     use Concerns\Asset;
 
     /**
-     * The default field values.
+     * The field name.
+     *
+     * @var string
+     */
+    public $name = 'example';
+
+    /**
+     * The field label.
+     *
+     * @var string
+     */
+    public $label = 'Example';
+
+    /**
+     * The field category.
+     *
+     * @var string
+     */
+    public $category = 'basic';
+
+    /**
+     * The field defaults.
      *
      * @var array
      */
-    public $defaults = [
-        'return_format' => 'array',
-    ];
+    public $defaults = ['return_format' => 'string'];
 
     /**
-     * Create a new Field instance.
+     * Create a new phone number field instance.
      *
-     * @param  callable $plugin
+     * @param  string $uri
+     * @param  string $path
      * @return void
      */
-    public function __construct(callable $plugin)
+    public function __construct($uri, $path)
     {
-        $this->label = $plugin->label;
-        $this->name = $plugin->name;
-        $this->category = $plugin->category;
-        $this->uri = $plugin->uri;
-        $this->path = $plugin->path;
+        $this->uri = $uri;
+        $this->path = $path;
 
         parent::__construct();
     }
@@ -152,10 +169,10 @@ class Field extends \acf_field
      * @param  string $key
      * @return void
      */
-    // public function delete_value($post_id, $key)
-    // {
-    //     return;
-    // }
+    public function delete_value($post_id, $key)
+    {
+        parent::delete_value($post_id, $key);
+    }
 
     /**
      * The field after loading from the database.
@@ -185,10 +202,10 @@ class Field extends \acf_field
      * @param  array $field
      * @return void
      */
-    // public function delete_field($field)
-    // {
-    //     return;
-    // }
+    public function delete_field($field)
+    {
+        parent::delete_field($field);
+    }
 
     /**
      * The assets enqueued when rendering the field.

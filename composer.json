@@ -1,7 +1,7 @@
 {
   "name": "log1x/acf-field-boilerplate",
   "type": "wordpress-plugin",
-  "description": "A modernized starting point for custom Advanced Custom Fields field types.",
+  "description": "A clean starting point for custom Advanced Custom Fields field types.",
   "keywords": [
     "acf",
     "acf-field",
@@ -9,8 +9,7 @@
     "wordpress-plugin"
   ],
   "require": {
-    "php": ">=7.2",
-    "composer/installers": "~1.0"
+    "php": ">=7.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5"

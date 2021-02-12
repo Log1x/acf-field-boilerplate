@@ -1,6 +1,6 @@
-;(function($) {
+(function ($) {
   if (typeof acf.add_action === 'undefined') {
-    return
+    return;
   }
 
   /**
@@ -9,9 +9,9 @@
    *
    * @param {jQuery} element
    */
-  acf.add_action('ready append', function(element) {
-    acf.get_fields({ type: 'example_field' }, element).each(function() {
+  acf.add_action('ready append', function (element) {
+    acf.get_fields({ type: 'example_field' }, element).each(function () {
       // console.log($(this))
-    })
-  })
-})(jQuery)
+    });
+  });
+})(jQuery);

@@ -3,51 +3,14 @@
 /**
  * Plugin Name: Advanced Custom Fields: Field Boilerplate
  * Plugin URI:  https://github.com/log1x/acf-field-boilerplate
- * Description: A modernized starting point for custom ACF field types.
- * Version:     1.1.0
+ * Description: A clean starting point for custom Advanced Custom Fields field types.
+ * Version:     1.0.0
  * Author:      Brandon Nifong
  * Author URI:  https://github.com/log1x
  */
 
-namespace Log1x\AcfExampleField;
-
 add_filter('after_setup_theme', new class
 {
-   /**
-     * The field label.
-     *
-     * @var string
-     */
-    public $label = 'Example Field';
-
-    /**
-     * The field name.
-     *
-     * @var string
-     */
-    public $name = 'example_field';
-
-    /**
-     * The field category.
-     *
-     * @var string
-     */
-    public $category = 'basic';
-
-    /**
-     * The field asset URI.
-     *
-     * @var string
-     */
-    public $uri;
-
-    /**
-     * The field asset path.
-     *
-     * @var string
-     */
-    public $path = 'public/';
-
     /**
      * Invoke the plugin.
      *
@@ -55,23 +18,19 @@ add_filter('after_setup_theme', new class
      */
     public function __invoke()
     {
-        if (! class_exists('\ACF')) {
-            return;
+        if (file_exists($composer = __DIR__ . '/vendor/autoload.php')) {
+            require_once $composer;
         }
 
-        $this->uri = plugin_dir_url(__FILE__) . $this->path;
-        $this->path = plugin_dir_path(__FILE__) . $this->path;
-
-        require_once file_exists($composer = __DIR__ . '/vendor/autoload.php') ?
-            $composer :
-            __DIR__ . '/dist/autoload.php';
-
         $this->register();
-        $this->registerAdminColumns();
+
+        if (defined('ACP_FILE')) {
+            $this->hookAdminColumns();
+        }
     }
 
     /**
-     * Register the field type with ACF.
+     * Register the Phone Number field type with ACF.
      *
      * @return void
      */
@@ -79,31 +38,31 @@ add_filter('after_setup_theme', new class
     {
         foreach (['acf/include_field_types', 'acf/register_fields'] as $hook) {
             add_filter($hook, function () {
-                return new Field($this);
+                return new Log1x\AcfExampleField\ExampleField(
+                    plugin_dir_url(__FILE__),
+                    plugin_dir_path(__FILE__)
+                );
             });
         }
     }
 
     /**
-     * Register the field type with ACP.
+     * Hook the Admin Columns Pro plugin to provide basic field support
+     * if detected on the current WordPress installation.
      *
      * @return void
      */
-    protected function registerAdminColumns()
+    protected function hookAdminColumns()
     {
-        if (! defined('ACP_FILE')) {
-            return;
-        }
-
         add_filter('ac/column/value', function ($value, $id, $column) {
             if (
                 ! is_a($column, '\ACA\ACF\Column') ||
-                $column->get_acf_field_option('type') !== $this->name
+                $column->get_acf_field_option('type') !== 'example'
             ) {
                 return $value;
             }
 
-            return get_field($column->get_meta_key()) ?: $value;
+            return get_field($column->get_meta_key()) ?? $value;
         }, 10, 3);
     }
 });
