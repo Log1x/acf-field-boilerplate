@@ -1,8 +1,8 @@
 # ACF Field Boilerplate
 
-[![Packagist](https://img.shields.io/packagist/v/log1x/acf-field-boilerplate.svg?style=flat-square)](https://packagist.org/packages/log1x/acf-field-boilerplate)
-![CircleCI](https://img.shields.io/circleci/build/gh/Log1x/acf-field-boilerplate.svg?style=flat-square)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/log1x/acf-field-boilerplate.svg?style=flat-square)](https://packagist.org/packages/log1x/acf-field-boilerplate)
+![Latest Stable Version](https://img.shields.io/packagist/v/log1x/acf-field-boilerplate?style=flat-square)
+![Total Downloads](https://img.shields.io/packagist/dt/log1x/acf-field-boilerplate?style=flat-square)
+![Build Status](https://img.shields.io/github/workflow/status/log1x/acf-field-boilerplate/compatibility)
 
 This is an ACF Field Type boilerplate to quickly make clean, well structured custom field types.
 
@@ -11,8 +11,8 @@ This is entirely based off of the original [acf-field-type-template](https://git
 ## Features
 
 - [Laravel Mix](https://laravelmix.com) for handling assets.
+- Support for Admin Columns Pro
 - PSR-12 code style & linting
-- Namespacing
 - Cleaner DocBlocks
 - Cleaner directory structure
 - Ready to use alongside other Composer packages
@@ -56,4 +56,4 @@ Contributing whether it be through PRs, reporting an issue, or suggesting an ide
 
 ## License
 
-ACF Field Boilerplate is provided under the [MIT License](https://github.com/log1x/acf-field-boilerplate/blob/master/LICENSE.md).
+ACF Field Boilerplate is provided under the [MIT License](LICENSE.md).
