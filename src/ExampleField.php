@@ -32,7 +32,9 @@ class ExampleField extends \acf_field
      *
      * @var array
      */
-    public $defaults = ['return_format' => 'string'];
+    public $defaults = [
+        'return_format' => 'string',
+    ];
 
     /**
      * Create a new phone number field instance.
