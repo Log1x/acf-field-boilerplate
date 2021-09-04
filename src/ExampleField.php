@@ -89,9 +89,9 @@ class ExampleField extends \acf_field
     public function render_field_settings($field)
     {
         acf_render_field_setting($field, [
-            'label' => 'Return Format',
+            'label' => __('Return Format', 'acf-field-boilerplate'),
             'name' => 'return_format',
-            'instructions' => 'The format of the returned data.',
+            'instructions' => __('The format of the returned data.', 'acf-field-boilerplate'),
             'type' => 'select',
             'ui' => '1',
             'choices' => [
