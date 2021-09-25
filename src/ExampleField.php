@@ -37,7 +37,7 @@ class ExampleField extends \acf_field
     ];
 
     /**
-     * Create a new phone number field instance.
+     * Create a new field instance.
      *
      * @param  string $uri
      * @param  string $path
