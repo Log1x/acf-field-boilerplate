@@ -30,7 +30,7 @@ add_filter('after_setup_theme', new class
     }
 
     /**
-     * Register the Phone Number field type with ACF.
+     * Register the field type with ACF.
      *
      * @return void
      */
